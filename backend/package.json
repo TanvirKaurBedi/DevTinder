@@ -1,0 +1,20 @@
+{
+  "name": "devtinder",
+  "version": "1.0.0",
+  "description": "tinders for dev",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/app.js"
+  },
+  "keywords": [
+    "nodejs",
+    "javascript"
+  ],
+  "author": "Tanvir Kour",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1",
+    "mongoose": "^9.3.1",
+    "nodemon": "^3.1.14"
+  }
+}
