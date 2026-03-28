@@ -6,6 +6,7 @@ const { signupValidatior } = require("./utils/validations");
 const bcrypt = require("bcrypt");
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
+const { userAuth } = require("./middlewares/auth");
 
 app.use(express.json());
 app.use(cookieParser());
@@ -51,20 +52,8 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.post("/profile", async (req, res) => {
-  const { token } = req.cookies;
-  if (!token) {
-    throw new Error("Invalid token");
-  }
-
-  const decodedMessage = jwt.verify(token, "DEVTINDER1997");
-  const { _id } = decodedMessage;
-
-  const user = await User.findById(_id);
-  if (!user) {
-    throw new Error("Invalid User");
-  }
-  res.send(user);
+app.post("/profile", userAuth, async (req, res) => {
+  res.send(req.user);
 });
 
 // get user by emailId
