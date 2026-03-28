@@ -4,8 +4,10 @@ const connectDb = require("./config/database");
 const User = require("./models/user");
 const { signupValidatior } = require("./utils/validations");
 const bcrypt = require("bcrypt");
+const cookieParser = require("cookie-parser");
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.post("/signup", async (req, res) => {
   try {
@@ -45,6 +47,13 @@ app.post("/login", async (req, res) => {
   } catch (err) {
     res.status(400).send(err);
   }
+});
+
+app.post("/profile", (req, res) => {
+  console.log(req.cookies);
+  const { token } = req.cookies;
+  console.log("token", token);
+  res.send("profile");
 });
 
 // get user by emailId
