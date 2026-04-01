@@ -16,12 +16,15 @@ ConnectionRequestRouter
 -POST /request/review/accepted/:requestId
 -POST /request/review/rejected/:requestId
 
+(We can make the status dynamic one api for above for apis that is below
+-POST /request/review/status/:requestId)
+
 User Router
 -GET /user/connections
 -GET /user/request/received
 -GET /user/feed (gets you the profile of other users using this platform)
 
--status
+-status  
 ignored
 interested
 accepted

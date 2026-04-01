@@ -9,7 +9,6 @@ router.post("/signup", async (req, res) => {
     signupValidatior(req.body);
     const { name, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    console.log("hashedPassword", hashedPassword);
     const user = new User({
       name,
       email,

@@ -14,7 +14,7 @@ const connectionRequestSchema = new mongoose.Schema(
       type: String,
       required: true,
       enum: {
-        values: ["ignore", "accepted", "interested", "rejected"],
+        values: ["ignored", "accepted", "interested", "rejected"],
         message: `{VALUE} is incorrect status type`,
       },
     },
@@ -23,8 +23,14 @@ const connectionRequestSchema = new mongoose.Schema(
     timestamps: true,
   },
 );
+connectionRequestSchema.pre("save", function (next) {
+  if (this.fromUserId.toString() === this.toUserId.toString()) {
+    return next(new Error("fromUserId and toUserId cannot be the same"));
+  }
+  next();
+});
 
-connectionRequestModel = new mongoose.module(
+connectionRequestModel = new mongoose.model(
   "ConnectionRequest",
   connectionRequestSchema,
 );

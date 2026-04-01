@@ -8,9 +8,8 @@ router.get("/profile/view", userAuth, async (req, res) => {
   res.send(req.user);
 });
 
-router.patch("/profile/edit", userAuth, async (req, res) => {
+router.patch("/profile/status/edit", userAuth, async (req, res) => {
   try {
-    console.log("validateEditProfileData", validateEditProfileData(req));
     if (!validateEditProfileData(req)) {
       res.status(400).send("Invalid Request");
       throw new Error("Invalid edit request");
