@@ -4,4 +4,19 @@ const signupValidatior = (data) => {
     throw new Error("Name, email and password are required");
   }
 };
-module.exports = { signupValidatior };
+const validateEditProfileData = (req) => {
+  const allowedUpdates = [
+    "name",
+    "email",
+    "age",
+    "gender",
+    "about",
+    "photoUrl",
+    "skills",
+  ];
+  const isEditAllowed = Object.keys(req.body).every((key) => {
+    return allowedUpdates.includes(key);
+  });
+  return isEditAllowed;
+};
+module.exports = { signupValidatior, validateEditProfileData };
