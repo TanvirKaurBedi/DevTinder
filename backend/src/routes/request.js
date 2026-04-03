@@ -66,22 +66,45 @@ router.post("/request/send/:status/:toUserId", userAuth, async (req, res) => {
   }
 });
 
-router.post("/request/review/status/:requestId", userAuth, async (req, res) => {
-  try {
-    // firt write all the test cases that u need to fullfill or check
-    //  loggedIn User = toUserId
-    // status should not be equal to ignored
-    // once accepted shld not be able to accept again
-    //requested Id should be valid it shld be  in database it shld not be random
+router.post(
+  "/request/review/:status/:requestId",
+  userAuth,
+  async (req, res) => {
+    try {
+      // firt write all the test cases that u need to fullfill or check
+      //  loggedIn User = toUserId
+      // status should not be equal to ignored
+      // once accepted shld not be able to accept again
+      //requested Id should be valid it shld be  in database it shld not be random
 
-    const allowedStatus = ["accepted", "rejected"];
-    const { status, requestId } = req.params;
-    if (!allowedStatus.includes(status)) {
-      return res.status(400).json({ message: "status not allowed" });
+      const allowedStatus = ["accepted", "rejected"];
+      const { status, requestId } = req.params;
+      const loggedInUser = req.user;
+      if (!allowedStatus.includes(status)) {
+        return res.status(400).json({ message: "status not allowed" });
+      }
+      let connection = await connectionRequest.findOne({
+        _id: requestId,
+        toUserId: loggedInUser._id,
+        status: "interested", // only pending requests can be reviewed
+      });
+      if (!connection) {
+        return res.status(404).json({
+          message: "Connection request not found or already reviewed",
+        });
+      }
+
+      connection.status = status;
+      const updatedData = await connection.save();
+      res.json({
+        message: "Connection request " + status,
+        data: updatedData,
+      });
+    } catch (err) {
+      console.log("review error", err.message);
+      res.status(400).send(err);
     }
-  } catch (err) {
-    res.status(400).send(err);
-  }
-});
+  },
+);
 
 module.exports = router;

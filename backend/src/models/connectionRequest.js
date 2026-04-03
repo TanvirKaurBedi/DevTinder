@@ -26,11 +26,11 @@ const connectionRequestSchema = new mongoose.Schema(
 );
 
 connectionRequestSchema.index({ fromUserId: 1, toUserId: 1 }, { unique: true });
-connectionRequestSchema.pre("save", function (next) {
-  if (this.fromUserId.toString() === this.toUserId.toString()) {
-    return next(new Error("fromUserId and toUserId cannot be the same"));
+
+connectionRequestSchema.pre("save", async function () {
+  if (this.fromUserId.equals(this.toUserId)) {
+    throw new Error("fromUserId and toUserId cannot be the same");
   }
-  next();
 });
 
 connectionRequestModel = new mongoose.model(
