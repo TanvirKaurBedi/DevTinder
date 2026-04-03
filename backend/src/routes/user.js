@@ -18,4 +18,21 @@ router.get("/user/requests/received", userAuth, async (req, res) => {
   }
 });
 
+// get all the connections for the loggedIn User
+router.get("/user/connections", userAuth, async (req, res) => {
+  try {
+    const loggedInUser = req.user;
+    const connections = await ConnectionRequests.find({
+      $or: [
+        { fromUserId: loggedInUser._id, status: "accepted" },
+        { toUserId: loggedInUser._id, status: "accepted" },
+      ],
+    }).populate("fromUserId toUserId", ["name", "email"]);
+    res.json({ message: "Data Fetched Successfully", data: connections });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
 module.exports = router;
