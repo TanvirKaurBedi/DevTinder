@@ -13,9 +13,11 @@ Profile Router
 ConnectionRequestRouter
 -POST /request/send/interested/:userId
 -POST /request/send/ignored/:userId
+(We can make the status dynamic one api for above for apis that is below
+-POST /request/send/status/:requestId)
+
 -POST /request/review/accepted/:requestId
 -POST /request/review/rejected/:requestId
-
 (We can make the status dynamic one api for above for apis that is below
 -POST /request/review/status/:requestId)
 
