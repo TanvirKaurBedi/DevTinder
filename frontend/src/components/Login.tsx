@@ -1,4 +1,25 @@
+import axios from "axios";
+import { useState } from "react";
+
 const Login = () => {
+  const [email, setEmail] = useState("rashmipreet@gmail.com");
+  const [password, setPassword] = useState("123");
+
+  const handleLogin = async () => {
+    try {
+      const res = await axios.post(
+        "http://localhost:3000/login",
+        {
+          email,
+          password,
+        },
+        { withCredentials: true },
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-200">
       <div className="card w-full max-w-md shadow-2xl bg-base-100">
@@ -12,6 +33,8 @@ const Login = () => {
             </label>
             <input
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               className="input input-bordered"
             />
@@ -24,6 +47,8 @@ const Login = () => {
             </label>
             <input
               type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your password"
               className="input input-bordered"
             />
@@ -36,7 +61,9 @@ const Login = () => {
 
           {/* Button */}
           <div className="form-control mt-5">
-            <button className="btn btn-primary w-full">Login</button>
+            <button className="btn btn-primary w-full" onClick={handleLogin}>
+              Login
+            </button>
           </div>
 
           {/* Signup */}

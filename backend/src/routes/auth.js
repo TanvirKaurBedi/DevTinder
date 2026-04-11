@@ -33,7 +33,7 @@ router.post("/login", async (req, res) => {
     if (isPasswordValid) {
       const token = await user.getJwt();
       res.cookie("token", token);
-      res.status(200).send("Login Successfull");
+      res.status(200).json({ message: "Login Successful", data: user });
     } else {
       throw new Error("Invalid Password");
     }
