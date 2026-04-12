@@ -38,7 +38,9 @@ router.post("/login", async (req, res) => {
       throw new Error("Invalid Password");
     }
   } catch (err) {
-    res.status(400).send(err);
+    res.status(400).json({
+      message: err.message || "Something went wrong",
+    });
   }
 });
 

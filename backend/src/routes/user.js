@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const { userAuth } = require("../middlewares/auth");
 const ConnectionRequests = require("../models/connectionRequest");
-const { connect, connections } = require("mongoose");
 const User = require("../models/user");
 
 // get all the pending connection requests for the loggedIn User
