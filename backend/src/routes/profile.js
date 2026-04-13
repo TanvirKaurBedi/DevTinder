@@ -8,7 +8,7 @@ router.get("/profile/view", userAuth, async (req, res) => {
   res.send(req.user);
 });
 
-router.patch("/profile/status/edit", userAuth, async (req, res) => {
+router.patch("/profile/edit", userAuth, async (req, res) => {
   try {
     if (!validateEditProfileData(req)) {
       res.status(400).send("Invalid Request");
@@ -19,10 +19,14 @@ router.patch("/profile/status/edit", userAuth, async (req, res) => {
         loggedInuser[key] = req.body[key];
       });
       await loggedInuser.save();
-      res.send("Profile updated successfully");
+      res
+        .status(200)
+        .json({ message: "Profile updated successfully", data: loggedInuser });
     }
   } catch (err) {
-    console.log(err);
+    res.status(400).json({
+      message: err.message || "Failed to update profile",
+    });
   }
 });
 
