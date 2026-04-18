@@ -62,6 +62,7 @@ router.post("/request/send/:status/:toUserId", userAuth, async (req, res) => {
     const data = await connectionRequestInstance.save();
     res.json({ message: "Connection request sent successfully", data });
   } catch (err) {
+    console.log("send request error", err.message);
     res.status(400).json({ message: "ERROR: " + err.message });
   }
 });
