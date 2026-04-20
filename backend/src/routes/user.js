@@ -45,7 +45,7 @@ router.get("/user/connections", userAuth, async (req, res) => {
       }
       return row.fromUserId;
     });
-
+    console.log(" connections ", data);
     res.json({ message: "Data Fetched Successfully", data: data });
   } catch (err) {
     console.log(err);
@@ -67,7 +67,7 @@ router.get("/feed", userAuth, async (req, res) => {
     const loggedInUser = req.user;
 
     const page = parseInt(req.query.page) || 1;
-    let limit = parseInt(req.query.limit) || 10;
+    let limit = parseInt(req.query.limit) || 50;
     limit = limit > 50 ? 50 : limit;
     const skip = (page - 1) * limit;
 

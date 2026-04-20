@@ -46,10 +46,11 @@ const Login = () => {
         { withCredentials: true },
       );
       dispatch(addUser(res.data.data));
-      setIsLoginForm(true);
+      // setIsLoginForm(true);
+      navigate("/feed");
     } catch (err) {
       setError(
-        err.response?.data?.message || "An error occurred during login.",
+        err.response?.data?.message || "An error occurred during signup.",
       );
       console.error(err);
     }

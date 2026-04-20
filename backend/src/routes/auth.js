@@ -14,11 +14,14 @@ router.post("/signup", async (req, res) => {
       email,
       password: hashedPassword,
     });
-
+    const token = await user.getJwt();
+    res.cookie("token", token);
     await user.save();
-    res.json({ message: "User registered successfully" });
+    res.json({ message: "User registered successfully", data: user });
   } catch (err) {
-    res.status(400).send(err);
+    res.status(400).json({
+      message: err.message || "Something went wrong",
+    });
   }
 });
 
