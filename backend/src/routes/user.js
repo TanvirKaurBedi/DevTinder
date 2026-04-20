@@ -31,20 +31,36 @@ router.get("/user/requests/received", userAuth, async (req, res) => {
 // get all the connections for the loggedIn User
 router.get("/user/connections", userAuth, async (req, res) => {
   try {
+    const page = parseInt(req.query.page) || 1;
+    let limit = parseInt(req.query.limit) || 10;
+    limit = limit > 50 ? 50 : limit;
+    const skip = (page - 1) * limit;
     const loggedInUser = req.user;
     const connections = await ConnectionRequests.find({
       $or: [
         { fromUserId: loggedInUser._id, status: "accepted" },
         { toUserId: loggedInUser._id, status: "accepted" },
       ],
-    }).populate("fromUserId toUserId", "name email about photoUrl skills age");
+    })
+      .sort({ createdAt: -1, _id: -1 })
+      .skip(skip)
+      .limit(limit)
+      .populate("fromUserId toUserId", "name email about photoUrl skills age");
 
-    const data = connections.map((row) => {
+    const mappedUsers = connections.map((row) => {
       if (row.fromUserId._id.toString() === loggedInUser._id.toString()) {
         return row.toUserId;
       }
       return row.fromUserId;
     });
+
+    // Keep unique users in case multiple accepted requests exist for same pair.
+    const uniqueUsersMap = new Map();
+    mappedUsers.forEach((user) => {
+      uniqueUsersMap.set(user._id.toString(), user);
+    });
+    const data = Array.from(uniqueUsersMap.values());
+
     console.log(" connections ", data);
     res.json({ message: "Data Fetched Successfully", data: data });
   } catch (err) {

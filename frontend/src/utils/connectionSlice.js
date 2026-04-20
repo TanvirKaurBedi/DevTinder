@@ -5,7 +5,12 @@ const connectionSlice = createSlice({
   initialState: [],
   reducers: {
     addConnections: (state, action) => {
-      return action.payload;
+      const merged = [...state, ...action.payload];
+      const uniqueById = new Map();
+      merged.forEach((user) => {
+        uniqueById.set(user._id, user);
+      });
+      return Array.from(uniqueById.values());
     },
     removeConnections: (state, action) => {
       return [];

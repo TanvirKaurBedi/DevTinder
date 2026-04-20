@@ -28,29 +28,24 @@ const EditProfile = () => {
         },
         { withCredentials: true },
       );
-      console.log("RES", res);
       dispatch(addUser(res.data.data));
       setMessage("Profile updated successfully");
       setError("");
     } catch (err) {
-      console.log("EKSSSS", err.response.data.message);
       setMessage("");
       setError(err.response?.data?.message || "Failed to update profile");
-      return res.status(500).json({
-        message: err.message || "Server error",
-      });
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-base-200">
+    <div className="h-[calc(100vh-8rem)] bg-base-200 px-4 overflow-hidden flex items-center justify-center">
       <div className="card w-full max-w-md shadow-2xl bg-base-100">
-        <div className="card-body">
+        <div className="card-body items-center">
           <h2 className="text-2xl font-bold text-center mb-4">Edit Profile</h2>
 
           {/* Name */}
-          <div className="form-control">
-            <label className="label w-[100px]">
+          <div className="form-control w-full max-w-xs">
+            <label className="label justify-center">
               <span className="label-text">Name</span>
             </label>
             <input
@@ -61,8 +56,8 @@ const EditProfile = () => {
             />
           </div>
 
-          <div className="form-control">
-            <label className="label w-[100px]">
+          <div className="form-control w-full max-w-xs mt-3">
+            <label className="label justify-center">
               <span className="label-text">Age</span>
             </label>
             <input
@@ -74,12 +69,12 @@ const EditProfile = () => {
           </div>
 
           {/* Gender */}
-          <div className="form-control mt-3">
-            <label className="label w-[100px]">
+          <div className="form-control w-full max-w-xs mt-3">
+            <label className="label justify-center">
               <span className="label-text">Gender</span>
             </label>
             <select
-              className="select select-bordered"
+              className="select select-bordered text-center"
               value={gender}
               onChange={(e) => setGender(e.target.value)}
             >
@@ -91,8 +86,8 @@ const EditProfile = () => {
           </div>
 
           {/* About */}
-          <div className="form-control mt-3">
-            <label className="label w-[100px]">
+          <div className="form-control w-full max-w-xs mt-3">
+            <label className="label justify-center">
               <span className="label-text">About</span>
             </label>
             <textarea
@@ -103,8 +98,8 @@ const EditProfile = () => {
           </div>
 
           {/* Photo URL */}
-          <div className="form-control mt-3">
-            <label className="label w-[100px]">
+          <div className="form-control w-full max-w-xs mt-3">
+            <label className="label justify-center">
               <span className="label-text">Photo URL</span>
             </label>
             <input
@@ -126,7 +121,7 @@ const EditProfile = () => {
           )}
 
           {/* Button */}
-          <div className="form-control mt-5">
+          <div className="form-control mt-5 w-full max-w-xs">
             <button className="btn btn-primary w-full" onClick={handleUpdate}>
               Save Changes
             </button>
