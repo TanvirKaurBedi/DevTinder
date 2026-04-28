@@ -7,6 +7,7 @@ import Feed from "./components/Feed.jsx";
 import Profile from "./components/Profile.jsx";
 import Connections from "./components/Connections.jsx";
 import ConnectionRequests from "./components/ConnectionRequests.jsx";
+import Chat from "./components/Chat.jsx";
 function App() {
   return (
     <>
@@ -26,6 +27,7 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/connections" element={<Connections />} />
               <Route path="/requests" element={<ConnectionRequests />} />
+              <Route path="/chat" element={<Chat />} />
             </Route>
           </Routes>
         </BrowserRouter>

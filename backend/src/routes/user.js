@@ -60,8 +60,6 @@ router.get("/user/connections", userAuth, async (req, res) => {
       uniqueUsersMap.set(user._id.toString(), user);
     });
     const data = Array.from(uniqueUsersMap.values());
-
-    console.log(" connections ", data);
     res.json({ message: "Data Fetched Successfully", data: data });
   } catch (err) {
     console.log(err);

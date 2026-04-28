@@ -17,7 +17,6 @@ const Navbar = () => {
       );
       dispatch(removeUser());
       navigate("/login");
-      console.log(res.data);
     } catch (err) {
       console.error(err);
     }
@@ -65,6 +64,9 @@ const Navbar = () => {
               </li>
               <li>
                 <a onClick={() => navigate("/requests")}>Connection Requests</a>
+              </li>
+              <li>
+                <a onClick={() => navigate("/chat")}>Chat</a>
               </li>
               <li>
                 <a onClick={handleLogout}>Logout</a>
