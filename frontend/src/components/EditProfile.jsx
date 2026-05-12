@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import BASE_URL from "../utils/constants";
 import { useSelector, useDispatch } from "react-redux";
@@ -14,6 +14,15 @@ const EditProfile = () => {
   const [error, setError] = useState("");
   const [age, setAge] = useState(user_res?.age || "");
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!user_res) return;
+    setName(user_res?.name || "");
+    setGender(user_res?.gender || "");
+    setAbout(user_res?.about || "");
+    setPhotoUrl(user_res?.photoUrl || "");
+    setAge(user_res?.age || "");
+  }, [user_res]);
 
   const handleUpdate = async () => {
     try {
