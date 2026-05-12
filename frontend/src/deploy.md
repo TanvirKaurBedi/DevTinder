@@ -1,3 +1,7 @@
+Fpr connecting to server we have .pem file 
+connect using this command 
+ssh -i C:\Users\TanvirKaurBedi\Downloads\devTinder-secret.pem ubuntu@32.192.7.124
+
 1> Sign in into AWS
 2> Launch an EC2 instance
 3> chmod 400 <secret>.pem (change the permission for pem file)

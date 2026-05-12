@@ -38,43 +38,45 @@ const EditProfile = () => {
   };
 
   return (
-    <div className="h-[calc(100vh-8rem)] bg-base-200 px-4 overflow-hidden flex items-center justify-center">
-      <div className="card w-full max-w-md shadow-2xl bg-base-100">
-        <div className="card-body items-center">
-          <h2 className="text-2xl font-bold text-center mb-4">Edit Profile</h2>
+    <div className="h-full min-h-0 box-border bg-base-200 px-4 py-4 overflow-hidden flex items-center justify-center">
+      <div className="card h-full max-h-full w-full max-w-md shadow-2xl bg-base-100 overflow-hidden">
+        <div className="px-6 pt-6 pb-3 shrink-0">
+          <h2 className="text-2xl font-bold text-center">Edit Profile</h2>
+        </div>
 
+        <div className="px-6 pb-4 overflow-y-auto flex-1 space-y-4">
           {/* Name */}
-          <div className="form-control w-full max-w-xs">
-            <label className="label justify-center">
+          <div className="form-control w-full gap-1">
+            <label className="label justify-start py-0">
               <span className="label-text">Name</span>
             </label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="input input-bordered"
+              className="input input-bordered w-full"
             />
           </div>
 
-          <div className="form-control w-full max-w-xs mt-3">
-            <label className="label justify-center">
+          <div className="form-control w-full gap-1">
+            <label className="label justify-start py-0">
               <span className="label-text">Age</span>
             </label>
             <input
               type="number"
               value={age}
               onChange={(e) => setAge(e.target.value)}
-              className="input input-bordered"
+              className="input input-bordered w-full"
             />
           </div>
 
           {/* Gender */}
-          <div className="form-control w-full max-w-xs mt-3">
-            <label className="label justify-center">
+          <div className="form-control w-full gap-1">
+            <label className="label justify-start py-0">
               <span className="label-text">Gender</span>
             </label>
             <select
-              className="select select-bordered text-center"
+              className="select select-bordered w-full"
               value={gender}
               onChange={(e) => setGender(e.target.value)}
             >
@@ -86,27 +88,27 @@ const EditProfile = () => {
           </div>
 
           {/* About */}
-          <div className="form-control w-full max-w-xs mt-3">
-            <label className="label justify-center">
+          <div className="form-control w-full gap-1">
+            <label className="label justify-start py-0">
               <span className="label-text">About</span>
             </label>
             <textarea
               value={about}
               onChange={(e) => setAbout(e.target.value)}
-              className="textarea textarea-bordered"
+              className="textarea textarea-bordered w-full"
             />
           </div>
 
           {/* Photo URL */}
-          <div className="form-control w-full max-w-xs mt-3">
-            <label className="label justify-center">
+          <div className="form-control w-full gap-1">
+            <label className="label justify-start py-0">
               <span className="label-text">Photo URL</span>
             </label>
             <input
               type="text"
               value={photoUrl}
               onChange={(e) => setPhotoUrl(e.target.value)}
-              className="input input-bordered"
+              className="input input-bordered w-full"
             />
           </div>
 
@@ -120,12 +122,13 @@ const EditProfile = () => {
             <p className="text-error text-sm mt-3 text-center">{error}</p>
           )}
 
-          {/* Button */}
-          <div className="form-control mt-5 w-full max-w-xs">
-            <button className="btn btn-primary w-full" onClick={handleUpdate}>
-              Save Changes
-            </button>
-          </div>
+          <div className="h-2" />
+        </div>
+
+        <div className="px-6 py-4 border-t border-base-300 bg-base-100 shrink-0">
+          <button className="btn btn-primary w-full" onClick={handleUpdate}>
+            Save Changes
+          </button>
         </div>
       </div>
     </div>
