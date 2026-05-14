@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 
-const socket = io("http://32.192.7.124", {
+const socket = io("http://devlinkup.in", {
   withCredentials: true,
 });
 

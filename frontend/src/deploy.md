@@ -1,5 +1,5 @@
-Fpr connecting to server we have .pem file 
-connect using this command 
+Fpr connecting to server we have .pem file
+connect using this command
 ssh -i C:\Users\TanvirKaurBedi\Downloads\devTinder-secret.pem ubuntu@32.192.7.124
 
 1> Sign in into AWS
