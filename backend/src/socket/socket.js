@@ -5,7 +5,7 @@ const Message = require("../models/message");
 const initSocket = (server) => {
   const io = new Server(server, {
     cors: {
-      origin: "http://32.192.7.124",
+      origin: "http://devlinkup.in",
       credentials: true,
     },
   });
